@@ -1,0 +1,48 @@
+.r {
+  background-color: hsl(0, 100%, 50%);
+  border-color: hsl(0, 100%, 90%) hsl(0, 100%, 70%) hsl(0, 100%, 10%) hsl(0, 100%, 30%);
+}
+
+.g {
+  background-color: hsl(120, 100%, 50%);
+  border-color: hsl(120, 100%, 90%) hsl(120, 100%, 70%) hsl(120, 100%, 10%) hsl(120, 100%, 30%);
+}
+
+.b {
+  background-color: hsl(240, 100%, 50%);
+  border-color: hsl(240, 100%, 90%) hsl(240, 100%, 70%) hsl(240, 100%, 10%) hsl(240, 100%, 30%);
+}
+
+.y {
+  background-color: hsl(60, 100%, 50%);
+  border-color: hsl(60, 100%, 90%) hsl(60, 100%, 70%) hsl(60, 100%, 10%) hsl(60, 100%, 30%);
+}
+
+.c {
+  background-color: hsl(180, 100%, 50%);
+  border-color: hsl(180, 100%, 90%) hsl(180, 100%, 70%) hsl(180, 100%, 10%) hsl(180, 100%, 30%);
+}
+
+.m { /*pink for warning line*/
+  background-color: hsl(330, 100%, 70%);
+  border-color: hsl(330, 100%, 100%) hsl(330, 100%, 90%) hsl(330, 100%, 30%) hsl(330, 100%, 50%)
+}
+
+.o {
+  background-color: hsl(30, 100%, 50%);
+  border-color: hsl(30, 100%, 90%) hsl(30, 100%, 70%) hsl(30, 100%, 10%) hsl(30, 100%, 30%);
+}
+
+.p {
+  background-color: hsl(270, 100%, 50%);
+  border-color: hsl(270, 100%, 90%) hsl(270, 100%, 70%) hsl(270, 100%, 10%) hsl(270, 100%, 30%);
+}
+
+.n {
+  background-color: hsl(0, 0%, 50%);
+  border-color: hsl(0, 0%, 90%) hsl(0, 0%, 70%) hsl(0, 0%, 10%) hsl(0, 0%, 30%);
+}
+
+.k {
+  background-color: black;
+}
