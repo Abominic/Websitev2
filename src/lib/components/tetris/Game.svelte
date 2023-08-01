@@ -2,7 +2,7 @@
 	import { browser } from "$app/environment";
 	import { onDestroy } from "svelte";
 	import Grid from "./Grid.svelte";
-	import { newPiece, type Piece, type Board, Direction, randomPieceSelect, bakePiece, renderBoard, pieceAction, keyToDirection } from "./tetrisUtil";
+	import { newPiece, type Piece, type Board, Direction, randomPieceSelect, bakePiece, renderBoard, pieceAction, keyToDirection, rowClear } from "./tetrisUtil";
 
   let board: Board = {
     width: 10,
@@ -22,10 +22,7 @@
         if (piece && nextPiece) { //This is to make TypeScrpt shush.
           let collisionResult = pieceAction(board, piece, Direction.DOWN);
           if (!collisionResult) {
-            board.state = bakePiece(board, piece);
-
-            piece = newPiece(nextPiece);
-            nextPiece = randomPieceSelect();
+            solidify();
           } else {
             piece = collisionResult;
           }
@@ -35,10 +32,20 @@
       }, 500)
     };
 
+    let solidify = () => {
+      if (piece) {
+        board.state = bakePiece(board, piece);
+        let [newBoard, scoreDiff] = rowClear(board);
+        board = newBoard;
+        score += scoreDiff;
+        piece = newPiece(nextPiece);
+        nextPiece = randomPieceSelect();
+      } 
+    }
+
     let tickInterval = tickFunction();
     
     handleKeypress = (e) => {
-      console.log(e.code);
       let direction = keyToDirection(e);
       if (direction && piece) {
         let newPiece = pieceAction(board, piece, direction);
@@ -47,7 +54,9 @@
             clearInterval(tickInterval);
             tickInterval = tickFunction();
           }
-          piece = newPiece;
+          piece = newPiece
+        } else if (direction === Direction.DOWN) {
+          solidify();
         }
       }
     }
@@ -65,6 +74,7 @@
 </script>
 
 <div class="game">
+  <h2>Score {score}</h2>
   <Grid width={board.width} height={board.height} colours={renderedBoard} bordered={true}></Grid>
 </div>
 

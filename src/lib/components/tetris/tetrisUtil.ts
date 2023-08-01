@@ -101,18 +101,16 @@ export function keyToDirection(e: KeyboardEvent): Direction | null {
   }
 }
 
-function updatePiece(piece: Piece, direction: Direction): Piece {
+function updatePiece(piece: Piece, dir: Direction): Piece {
   let x = piece.x;
   let y = piece.y;
   let rot;
   let layout;
-  if (direction >= Direction.ROT_ACL) {
-    throw "not yet implemented";
-  } else {
+  if (dir < Direction.ROT_ACL){
     rot = piece.rot;
     layout = piece.layout;
 
-    switch(direction) {
+    switch(dir) {
       case Direction.UP:
         y -= 1;
         break;
@@ -128,24 +126,79 @@ function updatePiece(piece: Piece, direction: Direction): Piece {
       default:
         throw "invalid direction"
     }
+  } else {
+    let is_acl = dir === Direction.ROT_ACL;
+    rot = ((is_acl)?(piece.rot+1):(piece.rot+3))%4;
+    layout  = [];
+    for (let y = 0; y < piece.layout.length; y++) {
+      let row = [];
+      for (let x = 0; x < piece.layout[0].length; x++){
+        let oldX = is_acl?(piece.layout.length - y - 1):y;
+        let oldY = is_acl?x:(piece.layout[0].length - x - 1);
+
+        row.push(piece.layout[oldY][oldX]);
+      }
+      layout.push(row);
+    }
   }
 
   return {
     ...piece,
-    x: x,
-    y: y,
-    rot: rot,
-    layout: layout
+    x,
+    y,
+    rot,
+    layout
   };
 }
 
-export function pieceAction(board: Board, piece: Piece, direction: Direction): Piece | null {
-  let newPiece = updatePiece(piece, direction);
-  if (direction >= Direction.ROT_ACL) {
-    throw "not yet implemented"
+export function pieceAction(board: Board, piece: Piece, dir: Direction): Piece | null {
+  let newPiece = updatePiece(piece, dir);
+  if (dir >= Direction.ROT_ACL) {
+    let x = newPiece.x;
+    let y = newPiece.y;
+    let oldRot = piece.rot;
+
+    let idx = wkIndices.findIndex(x=>{
+      return x[0] == oldRot, x[1] == newPiece.rot;
+    });
+
+    if (idx === -1) {
+      throw "rotation error";
+    } 
+    for (let [dx, dy] of piece.wkData[idx]) {
+      newPiece.x = x + dx;
+      newPiece.y = y + dy;
+      if (testPieceCollision(board, newPiece)) {
+        return newPiece;
+      }
+    }
+
+    return null;
   } else {
     return testPieceCollision(board, newPiece)?newPiece:null;
   }
+}
+
+export function rowClear(board: Board): [Board, number]{
+  let score = 0;
+  let currentRow = board.height-1;
+  let currentState = board.state;
+  while (currentRow >= 0) {
+    let startIdx = currentRow*board.width;
+    let endIdx = (currentRow+1)*board.width;
+    let rowData = currentState.slice(startIdx, endIdx);
+    if (rowData.indexOf("k") === -1) {
+      currentState = "k".repeat(board.width) + currentState.slice(0,startIdx) + currentState.slice(endIdx);
+      score += 1;
+    } else {
+      currentRow -= 1;
+    }
+  }
+
+  return [{
+    ...board,
+    state: currentState,
+  }, score];
 }
 
 export function randomPieceSelect(): string {
@@ -254,6 +307,16 @@ export function newPiece(typ: string): Piece {
   }
 }
 
+const wkIndices = [
+  [0, 1],
+  [1, 0],
+  [1, 2],
+  [2, 1],
+  [2, 3],
+  [3, 2],
+  [3, 0],
+  [0, 3]
+];
 
 const wallKickData1 = [ //https://tetris.wiki/Super_Rotation_System
   [[0,0], [-1,0], [-1,1], [0,-2], [-1,-2]],
