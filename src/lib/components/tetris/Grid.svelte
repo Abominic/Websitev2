@@ -13,13 +13,9 @@
 
   let actualWidth = bordered?width+2:width;
 
-  let pixels: string;
-  if (bordered) {
-    pixels = addBorders(width, height, colours);
-  } else {
-    pixels = colours;
-  }
 
+  $: pixels = bordered?addBorders(width,height,colours):colours;
+    
 </script>
 
 <style>
