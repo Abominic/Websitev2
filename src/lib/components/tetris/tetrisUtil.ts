@@ -1,7 +1,8 @@
 export interface Board {
   width: number,
   height: number,
-  state: string
+  state: string,
+  yline: number
 }
 
 export interface Piece {
@@ -29,8 +30,7 @@ function combineBoardPiece(board: Board, piece: Piece): string[]{
 
 export function renderBoard(board: Board, piece: Piece) {
   let prerender = combineBoardPiece(board, piece);
-  const yLine = 3;
-  let offset = yLine * board.width;
+  let offset = board.yline * board.width;
   for (let i = offset; i < offset + board.width; i++) {
     if (prerender[i] === "k"){ //I should have done this part first but oh well.
       prerender[i] = "m";
@@ -41,6 +41,19 @@ export function renderBoard(board: Board, piece: Piece) {
 
 export function bakePiece(board: Board, piece: Piece): string {
   return combineBoardPiece(board, piece).join("");
+}
+
+export function checkForLoss(board: Board): boolean {
+  let start = board.width * board.yline;
+  let end = start + board.width;
+
+  for (let i = start; i < end; i++) {
+    if (board.state[i] !== "k") {
+      return true;
+    }
+  }
+  
+  return false;
 }
 
 

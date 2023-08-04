@@ -2,12 +2,13 @@
 	import { browser } from "$app/environment";
 	import { onDestroy } from "svelte";
 	import Grid from "./Grid.svelte";
-	import { newPiece, type Piece, type Board, Direction, randomPieceSelect, bakePiece, renderBoard, pieceAction, keyToDirection, rowClear } from "./tetrisUtil";
+	import { newPiece, type Piece, type Board, Direction, randomPieceSelect, bakePiece, renderBoard, pieceAction, keyToDirection, rowClear, checkForLoss } from "./tetrisUtil";
 
   let board: Board = {
     width: 10,
     height: 24,
-    state: "k".repeat(24*10)
+    state: "k".repeat(24*10),
+    yline: 3
   }
   
   let piece: Piece | null = null;
@@ -40,8 +41,12 @@
         score += scoreDiff;
         piece = newPiece(nextPiece);
         nextPiece = randomPieceSelect();
+
+        if (checkForLoss(board)) {
+
+        }
       } 
-    }
+    };
 
     let tickInterval = tickFunction();
     
@@ -59,7 +64,7 @@
           solidify();
         }
       }
-    }
+    };
 
     onDestroy(()=> {
       clearInterval(tickInterval);
