@@ -2,22 +2,58 @@
 	import { browser } from "$app/environment";
 	import { onDestroy } from "svelte";
 	import Grid from "./Grid.svelte";
-	import { newPiece, type Piece, type Board, Direction, randomPieceSelect, bakePiece, renderBoard, pieceAction, keyToDirection, rowClear, checkForLoss } from "./tetrisUtil";
+	import {
+    newPiece,
+    type Piece,
+    type Board,
+    Direction,
+    randomPieceSelect,
+    bakePiece,
+    renderBoard,
+    pieceAction,
+    keyToDirection,
+    rowClear,
+    checkForLoss, 
+	  getNextPreview
+  } from "./tetrisUtil";
 
-  let board: Board = {
+
+  const boardSettings = {
     width: 10,
     height: 24,
-    state: "k".repeat(24*10),
     yline: 3
-  }
+  };
   
-  let piece: Piece | null = null;
-  let score = 0;
+  let board: Board;
+  let piece: Piece;
+  let nextPiece: string;
+  let score: number;
   let handleKeypress: (e: KeyboardEvent)=>void;
+
+  let nextPieceBoard: Board = {
+    width: 6,
+    height: 6,
+    yline: -1,
+    state: "k".repeat(6*6)
+  };
+
+  const setup = () => {
+    score = 0;
+
+    if (browser) {
+      piece = newPiece(randomPieceSelect());
+      nextPiece = randomPieceSelect();
+    }
+
+    board =  {
+      ...boardSettings,
+      state: "k".repeat(24*10)
+    };
+  };
+
+  setup();
   if (browser) {
-    let nextPiece = randomPieceSelect();
-    piece = newPiece(randomPieceSelect());
-    
+
     let tickFunction = () => {
       return setInterval(()=>{
         if (piece && nextPiece) { //This is to make TypeScrpt shush.
@@ -30,7 +66,7 @@
         } else {
           throw "an error occurred.";
         }
-      }, 500)
+      }, 500);
     };
 
     let solidify = () => {
@@ -43,7 +79,8 @@
         nextPiece = randomPieceSelect();
 
         if (checkForLoss(board)) {
-
+          //TODO change to an actual loss screen.
+          setup();
         }
       } 
     };
@@ -73,14 +110,18 @@
     handleKeypress = (e)=>{};
   }
 
+
   $: renderedBoard = piece?renderBoard(board, piece):board.state;
+  $: renderedNext = nextPiece?renderBoard(nextPieceBoard, getNextPreview(nextPiece)):nextPieceBoard.state;
 
   
 </script>
 
+
 <div class="game">
   <h2>Score {score}</h2>
   <Grid width={board.width} height={board.height} colours={renderedBoard} bordered={true}></Grid>
+  <Grid width={nextPieceBoard.width} height={nextPieceBoard.height} colours={renderedNext} bordered={true}></Grid>
 </div>
 
 <svelte:window on:keydown={handleKeypress}/>

@@ -18,4 +18,13 @@
   
 </script>
 
-<slot></slot>
+<style>
+  #content-box {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+</style>
+
+<div id="content-box"><slot></slot></div>

@@ -30,12 +30,16 @@ function combineBoardPiece(board: Board, piece: Piece): string[]{
 
 export function renderBoard(board: Board, piece: Piece) {
   let prerender = combineBoardPiece(board, piece);
-  let offset = board.yline * board.width;
-  for (let i = offset; i < offset + board.width; i++) {
-    if (prerender[i] === "k"){ //I should have done this part first but oh well.
-      prerender[i] = "m";
+
+  if (board.yline >= 0) {
+    let offset = board.yline * board.width;
+    for (let i = offset; i < offset + board.width; i++) {
+      if (prerender[i] === "k"){ //I should have done this part first but oh well.
+        prerender[i] = "m";
+      }
     }
   }
+  
   return prerender.join("")
 }
 
@@ -54,6 +58,13 @@ export function checkForLoss(board: Board): boolean {
   }
   
   return false;
+}
+
+export function getNextPreview(letter: string): Piece {
+  let p =  newPiece(letter);
+  p.x = 1;
+  p.y = 1;
+  return p;
 }
 
 
