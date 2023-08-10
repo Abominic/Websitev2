@@ -15,7 +15,6 @@
       setDarkMode(e.matches);
     });
   }
-  
 </script>
 
 <style>
@@ -25,6 +24,18 @@
     justify-content: center;
   }
 
+  :global(body) {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  :global(a) {
+    text-decoration: underline 2px;
+  }
+
+  :global(a:visited) {
+    color: inherit;
+  }
 </style>
 
+<a href="/"><h1>Dom's Website</h1></a>
 <div id="content-box"><slot></slot></div>

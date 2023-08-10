@@ -5,5 +5,14 @@
 
 
 </script>
-<h2>cool tetris game</h2>
-<TetrisGame />
+
+<style>
+  .game-page {
+    text-align: center;
+  }
+</style>
+
+<div class="game-page">
+  <h2>Cool Tetris Game</h2>
+  <TetrisGame />
+</div>

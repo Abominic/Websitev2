@@ -117,11 +117,17 @@
   
 </script>
 
+<style>
+  .game {
+    display: flex;
+    gap: 2em;
+  }
+</style>
 
 <div class="game">
   <h2>Score {score}</h2>
   <Grid width={board.width} height={board.height} colours={renderedBoard} bordered={true}></Grid>
-  <Grid width={nextPieceBoard.width} height={nextPieceBoard.height} colours={renderedNext} bordered={true}></Grid>
+  <Grid width={nextPieceBoard.width} height={nextPieceBoard.height} colours={renderedNext} bordered={true}></Grid> 
 </div>
 
 <svelte:window on:keydown={handleKeypress}/>

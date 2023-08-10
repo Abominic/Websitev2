@@ -5,6 +5,7 @@
   <title>Cool testing Website!</title>
 </svelte:head>
 
-<h1>home page</h1>
-
-
+<div class="home-page">
+  <h2>Home</h2>
+  <a href="/tetris">Tetris Game</a>
+</div>
