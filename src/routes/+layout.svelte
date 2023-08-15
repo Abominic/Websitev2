@@ -35,6 +35,19 @@
   :global(a:visited) {
     color: inherit;
   }
+
+  :global(button) {
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  :global(body.dark button) {
+    color: white;
+    border-color: white;
+    background-color: inherit;
+  }
 </style>
 
 <a href="/"><h1>Dom's Website</h1></a>

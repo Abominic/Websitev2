@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addBorders } from "./util";
+	import { addBorders } from "./tetrisUtil";
   import "./pixels.css";
 
   export let width: number;
