@@ -1,7 +1,14 @@
 <script lang="ts">
-	import { Difficulty } from "./flaggame";
+	import { createEventDispatcher } from "svelte";
+import { Difficulty } from "./flaggame";
+
+  const dispatch = createEventDispatcher();
 
   let diff = Difficulty.EASY; //Default difficulty.
+
+  const startGame = () => {
+    dispatch("begin", {diff: diff});
+  };
 </script>
 
 <style>
@@ -19,7 +26,7 @@
     color: darkgreen;
     border-color: darkgreen;
   }
-  
+
   :global(body.dark) .start-button {
     color: lightgreen;
     border-color: lightgreen;
@@ -28,6 +35,11 @@
   :global(body.dark) .diff-selector > .selected { /* Had to add specificity to this selector otherwise CSS ignores it. :( */
     background-color: white;
     color: black; 
+  }
+
+  .credit {
+    font-style: italic;
+    color: gray;
   }
 </style>
 
@@ -49,6 +61,5 @@
     <li>As many options as medium difficulty.</li>
   {/if}
 </ul>
-<button class="start-button">Start</button>
-
-
+<button class="start-button" on:click={startGame} >Start</button>
+<p class="credit">Flag icons shamelessly stolen from: <a href="https://github.com/lipis/flag-icons">https://github.com/lipis/flag-icons</a>.</p>

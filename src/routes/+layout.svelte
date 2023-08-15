@@ -41,6 +41,7 @@
     padding: 10px;
     border-radius: 5px;
     font-weight: bold;
+    cursor: pointer;
   }
 
   :global(body.dark button) {
