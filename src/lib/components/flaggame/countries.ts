@@ -23,6 +23,21 @@ export function genCountryEasy(): CountryJSON {
   return country;
 }
 
+export function genOptions(c: Country, num: number, easy: boolean) {
+  let options: Country[] = [c];
+  while (options.length < num) {
+    let nextC: Country;
+    do { 
+      nextC = easy?genCountryEasy():genCountry();
+    } while (options.some(val => { //avoid duplicates
+      val.code === nextC.code
+    }));
+    options.push(nextC);
+  }
+
+  return options;
+}
+
 interface CountryJSON {
   code: string,
   continent?: string,

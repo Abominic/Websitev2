@@ -21,8 +21,10 @@
 </script>
 
 <style>
-  .game-page {
+  .game-page > :global(*) {
     text-align: center;
+    display: block;
+    margin: 1em auto auto auto;
   }
 </style>
 
