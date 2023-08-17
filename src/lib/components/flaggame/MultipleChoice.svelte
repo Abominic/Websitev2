@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-  import { genOptions, type Country } from "./countries";
+  import { genOptions, type Country } from "./flaggame";
 
   export let country: Country;
   export let num: number;
@@ -20,8 +20,12 @@
     width: 100%;
   }
 
+  .multiple-choice {
+    margin-top: 10px;
+  }
+
   .option-button {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 </style>
 

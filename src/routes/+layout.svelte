@@ -18,6 +18,10 @@
 </script>
 
 <style>
+  h1 {
+    text-align: center;
+  }
+
   #content-box {
     margin: auto;
     display: flex;
@@ -51,5 +55,5 @@
   }
 </style>
 
-<a href="/"><h1>Dom's Website</h1></a>
+<h1><a href="/">Dom's Website</a></h1>
 <div id="content-box"><slot></slot></div>

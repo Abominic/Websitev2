@@ -1,19 +1,25 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte";
 	import MultipleChoice from "./MultipleChoice.svelte";
-import { genCountry, type Country } from "./countries";
-  import { Difficulty } from "./flaggame";
+  import { genCountry, type Country, Difficulty, genCountryEasy, type FlagResult } from "./flaggame";
 
   export let diff: Difficulty;
   export let numGames: number;
+  export let end: (res: FlagResult[])=>void;
 
   let results: FlagResult[] = [];
-  interface FlagResult {
-    sel: Country,
-    ans: Country
+
+  function randomCountry() {
+    let tempCountry: Country;
+    do {
+      tempCountry = (diff===Difficulty.EASY)?genCountryEasy():genCountry();
+    } while (results.some(c => c.ans === tempCountry));
+
+    return tempCountry;
   }
 
-  let country = genCountry();
-  let nextCountry = genCountry();
+  let country = randomCountry();
+  let nextCountry = randomCountry();
   
   let numOptions: number;
   switch (diff) {
@@ -29,14 +35,17 @@ import { genCountry, type Country } from "./countries";
   }
 
   function countryGuess(c: Country){
-    results.push({
-      sel: c,
+    results = [...results, {
+      usr: c,
       ans: country
-    });
+    }];
 
-    //TODO end game here.
+    if (results.length === numGames) {
+      end(results);
+    }
+
     country = nextCountry;
-    nextCountry = genCountry();
+    nextCountry = randomCountry();
   }  
 </script>
 
@@ -48,6 +57,7 @@ import { genCountry, type Country } from "./countries";
 
 <div class="game">
   <h3>What flag is this?</h3>
+  <p>Question {results.length+1}/{numGames}</p>
   <img class="flag-image" src="/flags/{country.code}.svg" alt="some country"/>
   <MultipleChoice {country} easy={diff===Difficulty.EASY} num={numOptions} on:choice={e=>countryGuess(e.detail)}/>
 </div>

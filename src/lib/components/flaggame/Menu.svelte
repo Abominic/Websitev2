@@ -2,12 +2,12 @@
 	import { createEventDispatcher } from "svelte";
 import { Difficulty } from "./flaggame";
 
-  const dispatch = createEventDispatcher();
+  export let begin: (diff: Difficulty)=>void;
 
   let diff = Difficulty.EASY; //Default difficulty.
 
   const startGame = () => {
-    dispatch("begin", {diff: diff});
+    begin(diff);
   };
 </script>
 
