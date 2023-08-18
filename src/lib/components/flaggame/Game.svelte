@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
-	import MultipleChoice from "./MultipleChoice.svelte";
+	import CountrySearch from "./CountrySearch.svelte";
+import MultipleChoice from "./MultipleChoice.svelte";
   import { genCountry, type Country, Difficulty, genCountryEasy, type FlagResult } from "./flaggame";
 
   export let diff: Difficulty;
@@ -13,7 +13,7 @@
     let tempCountry: Country;
     do {
       tempCountry = (diff===Difficulty.EASY)?genCountryEasy():genCountry();
-    } while (results.some(c => c.ans === tempCountry));
+    } while (results.some(c => c.ans === tempCountry) && tempCountry!==country);
 
     return tempCountry;
   }
@@ -59,5 +59,9 @@
   <h3>What flag is this?</h3>
   <p>Question {results.length+1}/{numGames}</p>
   <img class="flag-image" src="/flags/{country.code}.svg" alt="some country"/>
-  <MultipleChoice {country} easy={diff===Difficulty.EASY} num={numOptions} on:choice={e=>countryGuess(e.detail)}/>
+  {#if diff <= Difficulty.MEDIUM}
+    <MultipleChoice {country} easy={diff===Difficulty.EASY} num={numOptions} on:choice={e=>countryGuess(e.detail)}/>
+  {:else}
+    <CountrySearch />
+  {/if}
 </div>

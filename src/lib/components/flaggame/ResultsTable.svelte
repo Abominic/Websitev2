@@ -37,7 +37,12 @@
 
   :global(body.dark) .result-row.correct {
     background-color: darkgreen;
-  }  
+  }
+
+  .flag-icon {
+    height: 1em;
+    vertical-align: middle;
+  }
 </style>
 
 <p>You scored {numCorrect}/{results.length}.</p>
@@ -49,8 +54,8 @@
     </tr>
     {#each results as r}
       <tr class="result-row" class:correct={r.usr.code === r.ans.code}>
-        <td>{r.usr.name}</td>
-        <td>{r.ans.name}</td>
+        <td><img src="/flags/{r.usr.code}.svg" class="flag-icon" alt={r.usr.code}/> {r.usr.name}</td>
+        <td><img src="/flags/{r.ans.code}.svg" class="flag-icon" alt={r.ans.code}/> {r.ans.name}</td>
       </tr>
     {/each}
   </table>

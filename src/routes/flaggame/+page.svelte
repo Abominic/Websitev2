@@ -46,6 +46,6 @@
   {:else if mode === Mode.GAME}
     <FlagGame diff={difficulty} numGames={10} end={endGame} />
   {:else if mode === Mode.RESULTS}
-    <ResultsTable {results} on:retry={()=>{startGame(difficulty)}} on:menu={menu}/>
+    <ResultsTable {results} on:retry={()=>{startGame(difficulty)}} on:menu={menu} />
   {/if}
 </div>
