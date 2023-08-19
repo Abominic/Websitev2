@@ -22,16 +22,6 @@ import { Difficulty } from "./flaggame";
     color: white;
   }
 
-  .start-button {
-    color: darkgreen;
-    border-color: darkgreen;
-  }
-
-  :global(body.dark) .start-button {
-    color: lightgreen;
-    border-color: lightgreen;
-  }
-
   :global(body.dark) .diff-selector > .selected { /* Had to add specificity to this selector otherwise CSS ignores it. :( */
     background-color: white;
     color: black; 
@@ -61,5 +51,5 @@ import { Difficulty } from "./flaggame";
     <li>As many options as medium difficulty.</li>
   {/if}
 </ul>
-<button class="start-button" on:click={startGame} >Start</button>
+<button class="green start-button" on:click={startGame} >Start</button>
 <p class="credit">Flag icons shamelessly stolen from: <a href="https://github.com/lipis/flag-icons">https://github.com/lipis/flag-icons</a>.</p>

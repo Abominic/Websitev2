@@ -53,6 +53,16 @@
     border-color: white;
     background-color: inherit;
   }
+
+  :global(.green) {
+    color: darkgreen;
+    border-color: darkgreen;
+  }
+
+  :global(body.dark .green) {
+    color: lightgreen;
+    border-color: lightgreen;
+  }
 </style>
 
 <h1><a href="/">Dom's Website</a></h1>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CountrySearch from "./CountrySearch.svelte";
-import MultipleChoice from "./MultipleChoice.svelte";
+  import MultipleChoice from "./MultipleChoice.svelte";
   import { genCountry, type Country, Difficulty, genCountryEasy, type FlagResult } from "./flaggame";
 
   export let diff: Difficulty;
@@ -8,8 +8,9 @@ import MultipleChoice from "./MultipleChoice.svelte";
   export let end: (res: FlagResult[])=>void;
 
   let results: FlagResult[] = [];
+  let country: Country;
 
-  function randomCountry() {
+  function randomCountry(): Country {
     let tempCountry: Country;
     do {
       tempCountry = (diff===Difficulty.EASY)?genCountryEasy():genCountry();
@@ -18,7 +19,7 @@ import MultipleChoice from "./MultipleChoice.svelte";
     return tempCountry;
   }
 
-  let country = randomCountry();
+  country = randomCountry();
   let nextCountry = randomCountry();
   
   let numOptions: number;
@@ -62,6 +63,6 @@ import MultipleChoice from "./MultipleChoice.svelte";
   {#if diff <= Difficulty.MEDIUM}
     <MultipleChoice {country} easy={diff===Difficulty.EASY} num={numOptions} on:choice={e=>countryGuess(e.detail)}/>
   {:else}
-    <CountrySearch />
+    <CountrySearch on:choice={e=>countryGuess(e.detail)}/>
   {/if}
 </div>

@@ -1,3 +1,5 @@
+import { distance } from "fastest-levenshtein";
+
 const EASY_GDP_THRESHOLD = 150;
 
 export enum Difficulty {
@@ -65,6 +67,64 @@ interface CountryJSON {
   iso: boolean,
   name: string,
   gdpRank?: number
+}
+
+export function search(query: string, num: number): Country[] {
+  if (query === "") {
+    return [];
+  }
+
+  let scores: [Country, number][] = [];
+  let cleanedQ = query.replace(/^\s*/, "").replace(/\s*$/, "").toLowerCase();
+
+  worldCountries.forEach(c => {
+    let cname = c.name.toLowerCase();
+    let score = searchScore(query, cname);
+    
+    let abbreviation = c.name.match(/\b([A-Z])/g)?.join('').toLowerCase();
+    let abbreviationScore = (abbreviation && abbreviation.length > 1)?(searchScore(cleanedQ, abbreviation)-100):Infinity;
+
+    score = Math.min(score, abbreviationScore);
+    
+    if (score === Infinity) {
+      score = distance(query, cname) + 100; //Penalise spelling mistakes.
+    }
+
+    scores.push([c, score]);
+  });
+
+  scores.sort(([c1, n1], [c2, n2]) => {
+    let ord = n1-n2;
+    if (ord === 0) {
+      return c1.name.localeCompare(c2.name);
+    } else {
+      return ord;
+    }
+  });
+
+  return scores.slice(0, 5).map(([c,n]) => c);
+}
+
+function searchScore(search: string, value: string) { //Search using a given string and count the characters that do not belong to the search (excluding the end of the string).
+  let mismatchScore = 0;
+  let searchIndex = 0;
+
+  for (let valueChar of value) {
+      if (valueChar === search[searchIndex]) {
+          searchIndex++;
+          if (searchIndex === search.length) {
+              break;
+          }
+      } else {
+          mismatchScore += 1;
+      }
+  }
+
+  if (searchIndex === search.length) {
+      return mismatchScore;
+  } else {
+      return Infinity;
+  }
 }
 
 export const worldCountries: CountryJSON[] = [
