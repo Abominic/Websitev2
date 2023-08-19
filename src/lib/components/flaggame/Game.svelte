@@ -52,14 +52,19 @@
 
 <style>
   .game {
-    width: 15vw;
+    width: 15em;
+  }
+
+  .preload-img {
+    display: none;
   }
 </style>
 
 <div class="game">
   <h3>What flag is this?</h3>
   <p>Question {results.length+1}/{numGames}</p>
-  <img class="flag-image" src="/flags/{country.code}.svg" alt="some country"/>
+  <img class="flag-image" src="/flags/{country.code}.svg" alt="some country" placeholder="loading..."/>
+  <img class="preload-img" src="/flags/{nextCountry.code}.svg" alt="preload"/>
   {#if diff <= Difficulty.MEDIUM}
     <MultipleChoice {country} easy={diff===Difficulty.EASY} num={numOptions} on:choice={e=>countryGuess(e.detail)}/>
   {:else}

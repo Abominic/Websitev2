@@ -63,7 +63,15 @@
     color: lightgreen;
     border-color: lightgreen;
   }
+
+  :global(a) {
+    color: inherit;
+  }
 </style>
+
+<svelte:head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</svelte:head>
 
 <h1><a href="/">Dom's Website</a></h1>
 <div id="content-box"><slot></slot></div>

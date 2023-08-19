@@ -61,6 +61,6 @@
   </table>
 </div>
 <div>
-  <button on:click={()=>dispatch("retry")}>Try Again</button>
+  <button on:click={()=>dispatch("retry")} class="green">Try Again</button>
   <button on:click={()=>dispatch("menu")}>Back to Menu</button>
 </div>
