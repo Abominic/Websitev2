@@ -15,7 +15,7 @@
     rowClear,
     checkForLoss, 
 	  getNextPreview
-  } from "./tetrisUtil";
+  } from "./ssUtil";
 
 
   const boardSettings = {

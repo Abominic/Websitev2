@@ -366,7 +366,7 @@ const wkIndices = [
   [0, 3]
 ];
 
-const wallKickData1 = [ //https://tetris.wiki/Super_Rotation_System
+const wallKickData1 = [ //https://[original game name here].wiki/Super_Rotation_System
   [[0,0], [-1,0], [-1,1], [0,-2], [-1,-2]],
   [[0,0], [1,0], [1,-1], [0,2], [1,2]],
   [[0,0], [1,0], [1,-1], [0,2], [1,2]],
