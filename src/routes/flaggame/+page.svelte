@@ -4,7 +4,6 @@
 	import type { FlagResult, Difficulty } from "$lib/components/flaggame/flaggame";
 	import Game from "$lib/components/squarestack/Game.svelte";
 
-
   enum Mode {
     MENU,
     GAME,

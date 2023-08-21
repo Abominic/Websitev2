@@ -17,14 +17,17 @@
   }
 
   img {
-    display: block;
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: .5em;
     max-height: 30em;
   }
 
-  :global(body.dark) img {
+  .link {
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: .5em;
+  }
+
+  :global(body.dark) .link {
     border: 2px solid white;
   }
 </style>
@@ -37,19 +40,22 @@
   A clone of a <span class="italic">certain</span> game written using Svelte. Only works with a keyboard (for now).
   [<a href={SQUARESTACK_LINK}>Game</a>]
   [<a href="https://github.com/Abominic/Websitev2">GitHub</a>]
+  <br>
   <!-- svelte-ignore a11y-img-redundant-alt -->
-  <a href={SQUARESTACK_LINK}><img src="/screenshots/ssdemo.png" alt="SquareStack demo image."/></a>
+  <a href={SQUARESTACK_LINK} class="link"><img src="/screenshots/ssdemo.png" alt="SquareStack demo image."/></a>
 
   <h3>Flag Game</h3>
   Guess the flag.
   [<a href={FLAGGAME_LINK}>Game</a>]
   [<a href="https://github.com/Abominic/Websitev2">GitHub</a>]
+  <br>
   <!-- svelte-ignore a11y-img-redundant-alt -->
-  <a href={FLAGGAME_LINK}><img src="/screenshots/flaggame.png" alt="Flag Game demo image."/></a>
+  <a href={FLAGGAME_LINK} class="link"><img src="/screenshots/flaggame.png" alt="Flag Game demo image."/></a>
 
   <h3>Domcraft</h3>
   <p>Proceduraly-generated (with multithreading) voxel engine (Minecraft-like) written in Rust. It will melt your laptop.</p>
   [<a href={DOMCRAFT_LINK}>GitHub</a>]
+  <br>
   <!-- svelte-ignore a11y-img-redundant-alt -->
-  <a href={DOMCRAFT_LINK}><img src="/screenshots/domcraft.png" alt="Domcraft preview image."/></a>
+  <a href={DOMCRAFT_LINK} class="link"><img src="/screenshots/domcraft.png" alt="Domcraft preview image."/></a>
 </div>
