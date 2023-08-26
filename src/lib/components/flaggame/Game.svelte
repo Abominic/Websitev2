@@ -14,7 +14,7 @@
     let tempCountry: Country;
     do {
       tempCountry = (diff===Difficulty.EASY)?genCountryEasy():genCountry();
-    } while (results.some(c => c.ans === tempCountry) && tempCountry!==country);
+    } while (results.some(c => c.ans === tempCountry) || tempCountry===country);
 
     return tempCountry;
   }

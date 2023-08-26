@@ -11,7 +11,7 @@
   }
 
   function keyPress(e: KeyboardEvent) {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && query.length > 0) {
       select(options[0]);
     }
   }

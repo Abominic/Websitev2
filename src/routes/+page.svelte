@@ -12,12 +12,18 @@
 </svelte:head>
 
 <style>
+  .home-page {
+    margin: 1em;
+    max-width: max(500px, 50%);
+  }
+
   .italic {
     font-style: italic;
   }
 
   img {
     max-height: 30em;
+    max-width: 100%;
   }
 
   .link {
@@ -33,7 +39,7 @@
 </style>
 
 <div class="home-page">
-  <h2>Home</h2>
+  <h2>Welcome</h2>
   <p>This is my place where I occasionally post my recent projects (big and small) as well as other things. There's more content coming soon now that I've finished university...</p>
 
   <h3>Stack the Squares</h3>

@@ -76,10 +76,11 @@ export function search(query: string, num: number): Country[] {
 
   let scores: [Country, number][] = [];
   let cleanedQ = query.replace(/^\s*/, "").replace(/\s*$/, "").toLowerCase();
+  
 
   worldCountries.forEach(c => {
     let cname = c.name.toLowerCase();
-    let score = searchScore(query, cname);
+    let score = searchScore(cleanedQ, cname);
     
     let abbreviation = c.name.match(/\b([A-Z])/g)?.join('').toLowerCase();
     let abbreviationScore = (abbreviation && abbreviation.length > 1)?(searchScore(cleanedQ, abbreviation)-100):Infinity;
@@ -87,7 +88,7 @@ export function search(query: string, num: number): Country[] {
     score = Math.min(score, abbreviationScore);
     
     if (score === Infinity) {
-      score = distance(query, cname) + 100; //Penalise spelling mistakes.
+      score = distance(cleanedQ, cname) + 100; //Penalise spelling mistakes.
     }
 
     scores.push([c, score]);
