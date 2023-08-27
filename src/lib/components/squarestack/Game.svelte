@@ -14,7 +14,13 @@
     keyToDirection,
     rowClear,
     checkForLoss, 
-	  getNextPreview
+	  getNextPreview,
+
+	  type RecentPieces,
+
+	  createRecentPieces
+
+
   } from "./ssUtil";
 	import KeyIcon from "./KeyIcon.svelte";
 
@@ -28,6 +34,7 @@
   let board: Board;
   let piece: Piece;
   let nextPiece: string;
+  let recent: RecentPieces;
   let score: number;
   let handleKeypress: (e: KeyboardEvent)=>void;
 
@@ -40,10 +47,13 @@
 
   const setup = () => {
     score = 0;
-
+    recent = createRecentPieces();
     if (browser) {
-      piece = newPiece(randomPieceSelect());
-      nextPiece = randomPieceSelect();
+      let curr = randomPieceSelect(recent);
+      let next = randomPieceSelect(curr[1]);
+      piece = newPiece(curr[0]);
+      nextPiece = next[0];
+      recent = next[1];
     }
 
     board =  {
@@ -77,7 +87,7 @@
         board = newBoard;
         score += scoreDiff;
         piece = newPiece(nextPiece);
-        nextPiece = randomPieceSelect();
+        [nextPiece, recent] = randomPieceSelect(recent);
 
         if (checkForLoss(board)) {
           //TODO change to an actual loss screen.

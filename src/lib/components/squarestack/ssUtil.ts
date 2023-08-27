@@ -14,6 +14,20 @@ export interface Piece {
   rot: number
 }
 
+export interface RecentPieces {[k: string]: number};
+
+export function createRecentPieces(): RecentPieces{
+  return {
+    I: 1,
+    J: 1,
+    L: 1,
+    O: 1,
+    S: 1,
+    T: 1,
+    Z: 1
+  };
+}
+
 function combineBoardPiece(board: Board, piece: Piece): string[]{
   let data = [];
   for (let i = 0; i < board.state.length; i++) {
@@ -249,9 +263,40 @@ export function rowClear(board: Board): [Board, number]{
   }, score];
 }
 
-export function randomPieceSelect(): string {
-  const availablePieces = ["I", "J", "L", "O", "S", "T", "Z"];
-  return availablePieces[Math.floor(Math.random()*availablePieces.length)]; //Select random piece.
+export function randomPieceSelect(recent: RecentPieces): [string, RecentPieces] {
+  // const availablePieces = ["I", "J", "L", "O", "S", "T", "Z"];
+  // return availablePieces[Math.floor(Math.random()*availablePieces.length)]; //Select random piece.
+
+  let v = Object.values(recent);
+  let total: number = v.reduce((prev, curr) => prev+curr);
+  let probs: number[] = v.map(v=> v/total);
+  let thresholds = []; //These thresholds are high-bounds, not low.
+  let accum = 0;
+  for (let p of probs) {
+    accum += p;
+    thresholds.push(accum);
+  }
+  
+  let rand = Math.random();
+
+
+  let letterIndex = thresholds.findIndex(t => (rand <= t));
+
+  if (letterIndex < 0) {
+    throw "An error occurred while selecting the piece.";
+  }
+  let newPiece = Object.keys(recent)[letterIndex];
+  return [newPiece, updateRecentPieces(recent, newPiece)];
+}
+
+function updateRecentPieces(recent: RecentPieces, piece: string): RecentPieces {
+  Object.keys(recent).forEach(k=> {
+    recent[k] += 1;
+  })
+
+  recent[piece] = 1;
+
+  return recent;
 }
 
 export function newPiece(typ: string): Piece {
@@ -342,7 +387,7 @@ export function newPiece(typ: string): Piece {
         2];
       break;
     default:
-      throw "invalid piece";
+      throw `Invalid piece: "${typ}"`;
   }
 
   return {
