@@ -1,9 +1,5 @@
 <script lang="ts">
   import {SSGame} from "$lib";
-
-  let pixels = "roymkgpbc";
-
-
 </script>
 
 <style>

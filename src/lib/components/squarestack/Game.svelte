@@ -16,6 +16,7 @@
     checkForLoss, 
 	  getNextPreview
   } from "./ssUtil";
+	import KeyIcon from "./KeyIcon.svelte";
 
 
   const boardSettings = {
@@ -88,15 +89,24 @@
     let tickInterval = tickFunction();
     
     handleKeypress = (e) => {
+      if (e.code === "KeyK") { //Reset when K is pressed.
+        setup();
+      }
+
       let direction = keyToDirection(e);
       if (direction && piece) {
         let newPiece = pieceAction(board, piece, direction);
         if (newPiece) {
+          piece = newPiece;
           if (direction === Direction.DOWN) { //Reset tick timer.
-            clearInterval(tickInterval);
-            tickInterval = tickFunction();
+            let testNext = pieceAction(board, newPiece, Direction.DOWN); //Check next.
+            if (testNext) {
+              clearInterval(tickInterval);
+              tickInterval = tickFunction();
+            } else {
+              solidify();
+            }
           }
-          piece = newPiece
         } else if (direction === Direction.DOWN) {
           solidify();
         }
@@ -125,7 +135,17 @@
 </style>
 
 <div class="game">
-  <h2>Score {score}</h2>
+  <div>
+    <h2>Score: {score}</h2>
+    <button on:click={setup}>Give Up<KeyIcon>K</KeyIcon></button>
+    <h3>Controls:</h3>
+    <p>Left: <KeyIcon>A</KeyIcon></p>
+    <p>Down: <KeyIcon>S</KeyIcon></p>
+    <p>Right: <KeyIcon>D</KeyIcon></p>
+    <p>Rotate Left: <KeyIcon>Q</KeyIcon></p>
+    <p>Rotate Right: <KeyIcon>E</KeyIcon></p>
+
+  </div>
   <Grid width={board.width} height={board.height} colours={renderedBoard} bordered={true}></Grid>
   <Grid width={nextPieceBoard.width} height={nextPieceBoard.height} colours={renderedNext} bordered={true}></Grid> 
 </div>
