@@ -10,6 +10,7 @@
     align-content: center;
     margin: 5px;
     font-weight: bold;
+    text-align: center;
   }
 
   :global(body.dark) .key-button {

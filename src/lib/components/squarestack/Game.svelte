@@ -41,10 +41,17 @@
   let piece: Piece;
   let nextPiece: string;
   let recent: RecentPieces;
-  let score: number;
-  let handleKeypress: (e: KeyboardEvent)=>void;
-  let state = GameState.INTRO;
   let tickInterval: number;
+  let state = GameState.INTRO;
+  let score: number;
+  let bestScore: number | null = null;
+
+  if (browser) {
+    let scoreStr = localStorage.getItem("bestScore");
+    if (scoreStr) {
+      bestScore = parseInt(scoreStr);
+    }
+  }
 
   let nextPieceBoard: Board = {
     width: 6,
@@ -53,7 +60,7 @@
     state: "k".repeat(6*6)
   };
 
-  const setup = () => {
+  function setup() {
     score = 0;
     recent = createRecentPieces();
     board =  {
@@ -62,7 +69,7 @@
     };
   };
 
-  const setupPiece = () => {
+  function setupPiece() {
     let curr = randomPieceSelect(recent);
     let next = randomPieceSelect(curr[1]);
     piece = newPiece(curr[0]);
@@ -72,7 +79,7 @@
 
   setup();
 
-  let solidify = () => {
+  function solidify() {
     if (piece) {
       board.state = bakePiece(board, piece);
       let [newBoard, scoreDiff] = rowClear(board);
@@ -82,15 +89,19 @@
       [nextPiece, recent] = randomPieceSelect(recent);
 
       if (checkForLoss(board)) {
-        //TODO change to an actual loss screen.
-        setup();
+        endGame();
       }
     } 
   };
   
-  handleKeypress = (e) => {
+  function handleKeypress(e: KeyboardEvent) {
+    if (state !== GameState.PLAYING) {
+      return;
+    }
+
     if (e.code === "KeyK") { //Reset when K is pressed.
-      setup();
+      endGame();
+      return;
     }
 
     let direction = keyToDirection(e);
@@ -111,9 +122,9 @@
         solidify();
       }
     }
-  };
+  }
 
-  let tickFunction = () => {
+  function tickFunction() {
     return setInterval(()=>{
       if (piece && nextPiece) { //This is to make TypeScrpt shush.
         let collisionResult = pieceAction(board, piece, Direction.DOWN);
@@ -128,11 +139,22 @@
     }, 500);
   };
 
-  let startGame = () => {
+  function startGame() {
     setup();
     setupPiece();
     state = GameState.PLAYING;
     tickInterval = tickFunction();
+  }
+
+
+  function endGame() {
+    state = GameState.END;
+    clearInterval(tickInterval);
+
+    if ((!bestScore || score > bestScore) && score > 0) {
+      bestScore = score;
+      localStorage.setItem("bestScore", score.toString());
+    }
   }
 
   onDestroy(()=> {
@@ -150,6 +172,12 @@
     display: flex;
     gap: 2em;
   }
+
+  .controls-list {
+    font-weight: bold;
+    list-style-type: none;
+    text-align: right;
+  }
 </style>
 
 <div class="game">
@@ -158,24 +186,30 @@
     <Overlay>
       <h3>SquareStack</h3>
       <p>Fill up the rows with pieces to achieve the highest score possible.</p>
-      <button class="green" on:click={()=>{startGame()}}>Start</button>
+      <button class="green" on:click={startGame}>Start</button>
     </Overlay>
   {:else if state === GameState.END}
     <Overlay>
       <h3>Game Over</h3>
-      <p>You scored: {score}.</p>
-      <button class="green" on:click={()=>{startGame()}}>Try Again</button>
+      <p>You scored: {score}</p>
+      <button class="green" on:click={startGame}>Try Again</button>
     </Overlay>
   {/if}
+
   <div>
     <h2>Score: {score}</h2>
-    <button on:click={setup}>Give Up<KeyIcon>K</KeyIcon></button>
-    <h3>Controls:</h3>
-    <p>Left: <KeyIcon>A</KeyIcon></p>
-    <p>Down: <KeyIcon>S</KeyIcon></p>
-    <p>Right: <KeyIcon>D</KeyIcon></p>
-    <p>Rotate Left: <KeyIcon>Q</KeyIcon></p>
-    <p>Rotate Right: <KeyIcon>E</KeyIcon></p>
+    {#if bestScore}
+      <h3>Best: {bestScore}</h3>
+    {/if}
+    <button on:click={endGame}>Give Up<KeyIcon>K</KeyIcon></button>
+    <h2>Controls:</h2>
+    <ul class="controls-list">
+      <li>Left: <KeyIcon>A</KeyIcon></li>
+      <li>Down: <KeyIcon>S</KeyIcon></li>
+      <li>Right: <KeyIcon>D</KeyIcon></li>
+      <li>Rotate Left: <KeyIcon>Q</KeyIcon></li>
+      <li>Rotate Right: <KeyIcon>E</KeyIcon></li>
+    <ul>
 
   </div>
   <Grid width={board.width} height={board.height} colours={renderedBoard} bordered={true}></Grid>

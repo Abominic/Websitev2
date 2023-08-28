@@ -11,8 +11,6 @@
     position: fixed;
     left: 0;
     top: 0;
-    display: flex;
-    align-items: center;
   }
 
   .overlay-inner {
@@ -22,6 +20,7 @@
     color: white;
     width: 15em;
     border-radius: 5px;
+    margin-top: 30vh;
   }
 </style>
 
