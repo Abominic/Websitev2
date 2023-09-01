@@ -18,7 +18,7 @@
 </script>
 
 <style>
-  h1 {
+  /* h1 {
     text-align: center;
   }
 
@@ -26,10 +26,11 @@
     margin: auto;
     display: flex;
     justify-content: center;
-  }
+  } */
 
   :global(body) {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
   }
 
   :global(a) {
@@ -72,6 +73,7 @@
 <svelte:head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </svelte:head>
-
-<h1><a href="/">Dom's Website</a></h1>
-<div id="content-box"><slot></slot></div>
+<!-- 
+<h1><a href="/">Dom's Website</a></h1> -->
+<!-- <div id="content-box"><slot></slot></div> -->
+<slot></slot>

@@ -95,31 +95,33 @@
   };
   
   function handleKeypress(e: KeyboardEvent) {
-    if (state !== GameState.PLAYING) {
-      return;
-    }
+    if (state === GameState.PLAYING) {
+      if (e.code === "KeyK") { //Reset when K is pressed.
+        endGame();
+        return;
+      }
 
-    if (e.code === "KeyK") { //Reset when K is pressed.
-      endGame();
-      return;
-    }
-
-    let direction = keyToDirection(e);
-    if (direction && piece) {
-      let newPiece = pieceAction(board, piece, direction);
-      if (newPiece) {
-        piece = newPiece;
-        if (direction === Direction.DOWN) { //Reset tick timer.
-          let testNext = pieceAction(board, newPiece, Direction.DOWN); //Check next.
-          if (testNext) {
-            clearInterval(tickInterval);
-            tickInterval = tickFunction();
-          } else {
-            solidify();
+      let direction = keyToDirection(e);
+      if (direction && piece) {
+        let newPiece = pieceAction(board, piece, direction);
+        if (newPiece) {
+          piece = newPiece;
+          if (direction === Direction.DOWN) { //Reset tick timer.
+            let testNext = pieceAction(board, newPiece, Direction.DOWN); //Check next.
+            if (testNext) {
+              clearInterval(tickInterval);
+              tickInterval = tickFunction();
+            } else {
+              solidify();
+            }
           }
+        } else if (direction === Direction.DOWN) {
+          solidify();
         }
-      } else if (direction === Direction.DOWN) {
-        solidify();
+      }
+    } else {
+      if (e.code === "Enter") {
+        startGame();
       }
     }
   }
@@ -186,13 +188,13 @@
     <Overlay>
       <h3>SquareStack</h3>
       <p>Fill up the rows with pieces to achieve the highest score possible.</p>
-      <button class="green" on:click={startGame}>Start</button>
+      <button class="green" on:click={startGame}>Start <KeyIcon>⏎</KeyIcon></button>
     </Overlay>
   {:else if state === GameState.END}
     <Overlay>
       <h3>Game Over</h3>
       <p>You scored: {score}</p>
-      <button class="green" on:click={startGame}>Try Again</button>
+      <button class="green" on:click={startGame}>Try Again <KeyIcon>⏎</KeyIcon></button>
     </Overlay>
   {/if}
 
