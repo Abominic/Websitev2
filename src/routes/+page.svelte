@@ -17,7 +17,7 @@
     font-style: italic;
   }
 
-  img {
+  /* img {
     max-height: 30em;
     max-width: 100%;
   }
@@ -31,7 +31,7 @@
 
   :global(body.dark) .link {
     border: 2px solid white;
-  }
+  } */
 
   .welcome {
     overflow: auto;
@@ -49,7 +49,31 @@
 
   .project {
     flex: 1;
-    min-width: min(500px, 100%);
+    min-width: min(650px, 100%);
+    height: 450px;
+    padding: 3em;
+  }
+
+  .projlink {
+    display: inline-block;
+    text-decoration: none;
+    padding: 1em;
+    background-color: white;
+    color: black;
+    border-radius: 3px;
+
+  }
+
+  #squarestack {
+    background-image: linear-gradient(35deg, rgba(0,255,255, 0.75), rgba(0,0,255,0.75)), url("/screenshots/ssdemo.png");
+  }
+
+  #flaggame {
+    background-image: linear-gradient(35deg, rgba(255, 63, 0, 0.75), rgba(255,255, 0,0.75)), url("/screenshots/flaggame.png");
+  }
+
+  #domcraft {
+    background-image: linear-gradient(35deg, rgba(0, 255, 255, 0.75), rgba(255,255, 0,0.75)), url("/screenshots/domcraft.png");
   }
 </style>
 <div>
@@ -61,31 +85,27 @@
     <h2>Projects</h2>
   </div>
   <div class="project-list">
-    <div class="project">
+    <div class="project" id="squarestack">
       <h3>Stack the Squares</h3>
       A clone of a <span class="italic">certain</span> game written using Svelte. Only works with a keyboard (for now).
-      [<a href={SQUARESTACK_LINK}>Game</a>]
-      [<a href="https://github.com/Abominic/Websitev2">GitHub</a>]
       <br>
-      <!-- svelte-ignore a11y-img-redundant-alt -->
-      <a href={SQUARESTACK_LINK} class="link"><img src="/screenshots/ssdemo.png" alt="SquareStack demo image."/></a>
+      <a href={SQUARESTACK_LINK} class="projlink">Game</a>
+      <a href="https://github.com/Abominic/Websitev2" class="projlink">GitHub</a>
     </div>
-    <div class="project">
+    <div class="project" id="flaggame">
       <h3>Flag Game</h3>
       A simple flag-guessing game.
-      [<a href={FLAGGAME_LINK}>Game</a>]
-      [<a href="https://github.com/Abominic/Websitev2">GitHub</a>]
       <br>
-      <!-- svelte-ignore a11y-img-redundant-alt -->
-      <a href={FLAGGAME_LINK} class="link"><img src="/screenshots/flaggame.png" alt="Flag Game demo image."/></a>
+      <a href={FLAGGAME_LINK} class="projlink">Game</a>
+      <a href="https://github.com/Abominic/Websitev2" class="projlink">GitHub</a>
     </div>
-    <div class="project">
+    <div class="project" id="domcraft">
       <h3>Domcraft</h3>
       <p>Proceduraly-generated (with multithreading) voxel engine (Minecraft-like) written in Rust. It will melt your laptop.</p>
-      [<a href={DOMCRAFT_LINK}>GitHub</a>]
       <br>
+      <a href={DOMCRAFT_LINK} class="projlink">GitHub</a>
       <!-- svelte-ignore a11y-img-redundant-alt -->
-      <a href={DOMCRAFT_LINK} class="link"><img src="/screenshots/domcraft.png" alt="Domcraft preview image."/></a>
+      <!-- <a href={DOMCRAFT_LINK} class="link"><img src="/screenshots/domcraft.png" alt="Domcraft preview image."/></a> -->
     </div>
   </div>
 </div>

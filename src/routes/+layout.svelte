@@ -47,12 +47,13 @@
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+    color: black;
   }
 
   :global(body.dark button) {
     color: white;
     border-color: white;
-    background-color: inherit;
+    background-color: #222;
   }
 
   :global(.green) {
