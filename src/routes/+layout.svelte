@@ -41,31 +41,6 @@
     color: inherit;
   }
 
-  :global(button) {
-    border: 2px solid black;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    color: black;
-  }
-
-  :global(body.dark button) {
-    color: white;
-    border-color: white;
-    background-color: #222;
-  }
-
-  :global(.green) {
-    color: darkgreen;
-    border-color: darkgreen;
-  }
-
-  :global(body.dark .green) {
-    color: lightgreen;
-    border-color: lightgreen;
-  }
-
   :global(a) {
     color: inherit;
   }

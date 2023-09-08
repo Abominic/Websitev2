@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import type { FlagResult } from "./flaggame";
+	import Button from "../Button.svelte";
 
   export let results: FlagResult[];
   
@@ -61,6 +62,6 @@
   </table>
 </div>
 <div>
-  <button on:click={()=>dispatch("retry")} class="green">Try Again</button>
-  <button on:click={()=>dispatch("menu")}>Back to Menu</button>
+  <Button on:click={()=>dispatch("retry")} green>Try Again</Button>
+  <Button on:click={()=>dispatch("menu")}>Back to Menu</Button>
 </div>

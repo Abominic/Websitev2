@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 import { Difficulty } from "./flaggame";
+	import Button from "../Button.svelte";
 
   export let begin: (diff: Difficulty)=>void;
 
@@ -12,21 +13,6 @@ import { Difficulty } from "./flaggame";
 </script>
 
 <style>
-  .diff-selector > button  {
-    display: inline;
-    transition: background-color .5s, color .5s;
-  }
-
-  .selected {
-    background-color: black;
-    color: white;
-  }
-
-  :global(body.dark) .diff-selector > .selected { /* Had to add specificity to this selector otherwise CSS ignores it. :( */
-    background-color: white;
-    color: black; 
-  }
-
   .credit {
     font-style: italic;
     color: gray;
@@ -35,9 +21,9 @@ import { Difficulty } from "./flaggame";
 
 <h3>Select Difficulty</h3>
 <div class="diff-selector">
-  <button class:selected={diff===0} on:click={()=>{diff = 0}}>Easy</button>
-  <button class:selected={diff===1} on:click={()=>{diff = 1}}>Medium</button>
-  <button class:selected={diff===2} on:click={()=>{diff = 2}}>Hard</button>
+  <Button highlight={diff===0} on:click={()=>{diff = 0}}>Easy</Button>
+  <Button highlight={diff===1} on:click={()=>{diff = 1}}>Medium</Button>
+  <Button highlight={diff===2} on:click={()=>{diff = 2}}>Hard</Button>
 </div>
 <ul class="features-list">
   {#if diff === Difficulty.EASY}
@@ -51,5 +37,5 @@ import { Difficulty } from "./flaggame";
     <li>As many options as medium difficulty.</li>
   {/if}
 </ul>
-<button class="green start-button" on:click={startGame} >Start</button>
+<Button green on:click={startGame}>Start</Button>
 <p class="credit">Flag icons shamelessly stolen from: <a href="https://github.com/lipis/flag-icons">https://github.com/lipis/flag-icons</a>.</p>

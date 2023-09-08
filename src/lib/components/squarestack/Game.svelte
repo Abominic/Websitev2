@@ -24,6 +24,7 @@
   } from "./ssUtil";
 	import KeyIcon from "./KeyIcon.svelte";
 	import Overlay from "./Overlay.svelte";
+	import Button from "../Button.svelte";
 
   enum GameState {
     INTRO,
@@ -188,13 +189,13 @@
     <Overlay>
       <h3>SquareStack</h3>
       <p>Fill up the rows with pieces to achieve the highest score possible.</p>
-      <button class="green" on:click={startGame}>Start <KeyIcon>⏎</KeyIcon></button>
+      <Button green on:click={startGame}>Start <KeyIcon>⏎</KeyIcon></Button>
     </Overlay>
   {:else if state === GameState.END}
     <Overlay>
       <h3>Game Over</h3>
       <p>You scored: {score}</p>
-      <button class="green" on:click={startGame}>Try Again <KeyIcon>⏎</KeyIcon></button>
+      <Button green on:click={startGame}>Try Again <KeyIcon>⏎</KeyIcon></Button>
     </Overlay>
   {/if}
 
@@ -203,7 +204,7 @@
     {#if bestScore}
       <h3>Best: {bestScore}</h3>
     {/if}
-    <button on:click={endGame}>Give Up<KeyIcon>K</KeyIcon></button>
+    <Button on:click={endGame}>Give Up<KeyIcon>K</KeyIcon></Button>
     <h2>Controls:</h2>
     <ul class="controls-list">
       <li>Left: <KeyIcon>A</KeyIcon></li>
@@ -212,7 +213,6 @@
       <li>Rotate Left: <KeyIcon>Q</KeyIcon></li>
       <li>Rotate Right: <KeyIcon>E</KeyIcon></li>
     <ul>
-
   </div>
   <Grid width={board.width} height={board.height} colours={renderedBoard} bordered={true}></Grid>
   <Grid width={nextPieceBoard.width} height={nextPieceBoard.height} colours={renderedNext} bordered={true}></Grid> 

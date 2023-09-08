@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import type { Country } from "./flaggame";
+	import Button from "../Button.svelte";
 
   export let options: Country[];
   export let highlightFirst: boolean = false;
@@ -13,21 +14,22 @@
 </script>
 
 <style>
-  .multiple-choice, .option-button {
+  .multiple-choice {
     width: 100%;
   }
 
-  .multiple-choice {
+  .multiple-choice > :global(*) {
+    width: 100%;
     margin-top: 10px;
   }
 
-  .option-button {
+  .multiple-choice {
     margin-top: 10px;
   }
 </style>
 
 <div class="multiple-choice">
   {#each options as o, index}
-    <button class="option-button" class:green={index===0&&highlightFirst} on:click={()=>{select(o)}}>{o.name}</button>
+    <Button green={index===0&&highlightFirst} on:click={()=>{select(o)}}>{o.name}</Button>
   {/each}
 </div>
