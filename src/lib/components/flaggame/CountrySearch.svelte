@@ -23,14 +23,19 @@
 
 <style>
   .search-bar {
-    border: 2px solid white;
+    border: 2px solid black;
     background-color: inherit;
     border-radius: 5px;
     padding: .5em;
     width: 100%;
     box-sizing: border-box;
-    color: white;
+    color: black;
     text-align: center;
+  }
+
+  :global(body.dark) .search-bar {
+    border: 2px solid white;
+    color: white;
   }
 </style>
 

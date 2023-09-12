@@ -1763,7 +1763,7 @@ export const worldCountries: CountryJSON[] = [
     "code": "va",
     "continent": "Europe",
     "iso": true,
-    "name": "Holy See"
+    "name": "Holy See (Vatican)"
   },
   {
     "code": "vc",

@@ -1,0 +1,6 @@
+[submodule "StarTest2"]
+	path = StarTest2
+	url = git@github.com:Abominic/StarTest2.git
+[submodule "src/StarTest2"]
+	path = src/StarTest2
+	url = git@github.com:Abominic/StarTest2.git
