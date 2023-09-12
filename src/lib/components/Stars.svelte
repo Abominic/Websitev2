@@ -10,7 +10,7 @@
   let container: HTMLDivElement;
 
   if (browser) {
-    let app = StarTest.new(false, false, 1024.0);
+    let app = new StarTest(false, false, 1024.0);
     app.initControls();
     onMount(()=> {
       app.bindContainer(container);

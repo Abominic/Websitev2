@@ -50,6 +50,10 @@
     height: 100%;
   }
 
+  .welcome-stars {
+    overflow:hidden;
+  }
+
   .header {
     text-align: center;
   }
@@ -62,11 +66,12 @@
 
   .project {
     flex: 1;
-    min-width: min(650px, 100%);
+    min-width: min(650px, calc(100% - 2em)); /* Includes the margin amount. */
     height: 450px;
     padding: 3em;
     margin:1em;
-    border-radius: 5px;;
+    border-radius: 5px;
+    box-sizing: border-box;
   }
 
   .projlink {
@@ -93,7 +98,7 @@
 <div>
   <div class="welcome">
     <div class="welcome-stars">
-      <Stars width="100%" height="100%"></Stars>
+      <Stars width="100%" height="100vh"></Stars>
     </div>
     <div class="welcome-overlay">
       <h1>Dom's Website</h1>
