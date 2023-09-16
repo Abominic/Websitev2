@@ -1,5 +1,6 @@
 <script>
-	import Stars from "$lib/components/Stars.svelte";
+	import Navbar from "$lib/components/Navbar.svelte";
+import Stars from "$lib/components/Stars.svelte";
 
   const SQUARESTACK_LINK = "/squarestack";
   const FLAGGAME_LINK = "/flaggame";
@@ -44,7 +45,7 @@
     position: relative
   }
 
-  .welcome-stars, .welcome-overlay {
+  .welcome-stars, .welcome-navbar, .welcome-title {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -57,6 +58,18 @@
   .header {
     text-align: center;
   }
+
+  .welcome-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+  }
+
+  .welcome-title-inner {
+    text-align: center;
+  }
+
 
   .project-list {
     display: flex;
@@ -100,12 +113,17 @@
     <div class="welcome-stars">
       <Stars width="100%" height="100vh"></Stars>
     </div>
-    <div class="welcome-overlay">
+    <div class="welcome-title">
+      <div class="welcome-title-inner">
       <h1>Dom's Website</h1>
       <p>This is my place where I occasionally post my recent projects (big and small) as well as other things. There's more content coming soon now that I've finished university...</p>
+      </div>
+    </div>
+    <div class="welcome-navbar">
+      <Navbar transparent></Navbar>
     </div>
   </div>
-  <div class="header">
+  <div class="header" id="projects">
     <h2>Projects</h2>
   </div>
   <div class="project-list">

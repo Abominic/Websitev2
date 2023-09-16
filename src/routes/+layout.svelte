@@ -33,6 +33,10 @@
     margin: 0;
   }
 
+  :global(h1, h2, h3, h4, h5, h6) {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
   :global(a) {
     text-decoration: underline 2px;
   }
