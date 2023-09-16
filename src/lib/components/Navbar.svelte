@@ -21,7 +21,7 @@
     text-decoration: none;
     vertical-align: middle;
     line-height: 5rem;
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   :global(body.dark) .navbar {

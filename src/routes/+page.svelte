@@ -91,6 +91,7 @@ import Stars from "$lib/components/Stars.svelte";
       rgba(255, 0, 0, 1) 100%
     );
     -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
     background-clip: text;
   }
 
