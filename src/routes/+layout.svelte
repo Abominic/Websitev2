@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
+	import { page } from "$app/stores";
 
   if (browser) {
     function setDarkMode(val: boolean){
@@ -15,6 +16,8 @@
       setDarkMode(e.matches);
     });
   }
+
+  console.log($page.url.pathname);
 </script>
 
 <style>

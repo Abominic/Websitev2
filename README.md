@@ -42,3 +42,5 @@ You can preview the production build with `npm run preview`.
 Decided that the old one was bad and using separate react builds for everything was not very space efficient.
 
 Hopefully this one will be much better.
+
+Install `wasm-pack` and build the `src/rust` directory. Then use `pnpm install --recursive` to install all of the necessary packages.

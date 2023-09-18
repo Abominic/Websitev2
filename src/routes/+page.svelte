@@ -95,10 +95,12 @@ import Stars from "$lib/components/Stars.svelte";
     background-clip: text;
   }
 
+  .section {
+    width: 100%;
+  }
 
   .project-list {
     display: flex;
-    width: 100%;
     flex-wrap: wrap;
   }
 
@@ -141,17 +143,24 @@ import Stars from "$lib/components/Stars.svelte";
     <div class="welcome-title">
       <div class="welcome-title-inner">
       <h1 class="rainbow-box">Dom's Website</h1>
-      <p>This is my place where I occasionally post my recent projects (big and small) as well as other things. There's more content coming soon now that I've finished university...</p>
+      <p>This is my place where I occasionally post my recent projects (big and small) as well as other things that I find interesting...</p>
       </div>
     </div>
     <div class="welcome-navbar">
       <Navbar transparent></Navbar>
     </div>
   </div>
+  <div class="header" id="about">
+    <h2>About Me</h2>
+  </div>
+  <div class="section">
+    <p>My name is Dom and I have recently graduated from university with a degree in Computer Science!</p>
+  </div>
+
   <div class="header" id="projects">
     <h2>Projects</h2>
   </div>
-  <div class="project-list">
+  <div class="section project-list">
     <div class="project" id="squarestack">
       <h3>Stack the Squares</h3>
       <p>A clone of a <span class="italic">certain</span> game written using Svelte. Only works with a keyboard (for now).</p>
