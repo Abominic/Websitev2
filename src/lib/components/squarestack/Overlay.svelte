@@ -21,6 +21,7 @@
     width: 15em;
     border-radius: 5px;
     margin-top: 30vh;
+    text-align: center;
   }
 </style>
 

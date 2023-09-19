@@ -1,18 +1,20 @@
 <script lang="ts">
+	import Logo from "./Logo.svelte";
+
   export let transparent: boolean = false;
+  export let showHome: boolean = false;
 </script>
 
 <style>
   .navbar {
     width: 100%;
-    height: 3rem;
+    height: 5rem;
     color: black;
     background-color: white;
-    text-align: right;
   }
 
   .navbar > * {
-    margin-right: 3em;
+    margin-left: 3em;
     margin-top: auto;
     margin-bottom: auto;
     /* text-decoration: none; */
@@ -24,6 +26,12 @@
     font-size: 1em;
   }
 
+  .navbar > .right {
+    margin-left: 0;
+    margin-right: 3em;
+    float: right;
+  }
+
   :global(body.dark) .navbar {
     color: white;
     background-color: #222;
@@ -33,14 +41,14 @@
     background-color: transparent !important;
     /* border-bottom: 1px solid white; */
   }
-
-  .other-logo {
-    height: 1em;
-  }
 </style>
 
 <div class="navbar" class:transparent>
-   <a href="/#about">About Me</a>
-   <a href="/#projects">Projects</a>
-   <a href="https://www.github.com/Abominic/"><img src="/github-mark-white.svg" alt="GitHub logo" class="other-logo"/></a>
+  {#if showHome}
+    <a href="/"><Logo forceWhite={transparent} logoType="home"/></a>
+  {/if}
+
+  <a href="https://www.github.com/Abominic/"  class="right"><Logo forceWhite={transparent} logoType="github"/></a>
+  <a href="/#projects" class="right">Projects</a>
+  <a href="/#about" class="right">About Me</a>
 </div>

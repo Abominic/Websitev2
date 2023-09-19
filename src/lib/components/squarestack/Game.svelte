@@ -174,6 +174,7 @@
   .game {
     display: flex;
     gap: 2em;
+    justify-content: center;
   }
 
   .controls-list {

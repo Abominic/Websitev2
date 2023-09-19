@@ -163,7 +163,7 @@ import Stars from "$lib/components/Stars.svelte";
   <div class="section project-list">
     <div class="project" id="squarestack">
       <h3>Stack the Squares</h3>
-      <p>A clone of a <span class="italic">certain</span> game written using Svelte. Only works with a keyboard (for now).</p>
+      <p>A clone of a <span class="italic">certain</span> game (re)written using Svelte. NOTE: Keyboard required. Maybe I'll figure out how I should do touch controls one day. </p>
       <br>
       <a href={SQUARESTACK_LINK} class="projlink">Game</a>
       <a href="https://github.com/Abominic/Websitev2" class="projlink">GitHub</a>

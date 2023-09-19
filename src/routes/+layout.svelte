@@ -16,8 +16,6 @@
       setDarkMode(e.matches);
     });
   }
-
-  console.log($page.url.pathname);
 </script>
 
 <style>
