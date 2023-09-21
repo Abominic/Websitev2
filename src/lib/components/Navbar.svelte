@@ -50,5 +50,5 @@
 
   <a href="https://www.github.com/Abominic/"  class="right"><Logo forceWhite={transparent} logoType="github"/></a>
   <a href="/#projects" class="right">Projects</a>
-  <a href="/#about" class="right">About Me</a>
+  <!-- <a href="/#about" class="right">About Me</a> -->
 </div>

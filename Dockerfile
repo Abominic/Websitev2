@@ -9,5 +9,6 @@ RUN pnpm build
 
 FROM node:slim
 WORKDIR /server
-COPY --from=0 /src/build .
-CMD [ "node", "index.js" ]
+COPY --from=0 /src .
+#This runs the server located in the build dir (not build it).
+CMD [ "node", "build" ]

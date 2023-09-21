@@ -1,10 +1,21 @@
 <script>
 	import Navbar from "$lib/components/Navbar.svelte";
-import Stars from "$lib/components/Stars.svelte";
+  import Stars from "$lib/components/Stars.svelte";
 
   const SQUARESTACK_LINK = "/squarestack";
   const FLAGGAME_LINK = "/flaggame";
   const DOMCRAFT_LINK = "https://github.com/Abominic/Domcraft";
+
+  function getTimeofDay() {
+    let d = new Date();
+    if (d.getHours() < 12) {
+      return "morning";
+    } else if (d.getHours() < 17) {
+      return "afternoon";
+    } else {
+      return "evening";
+    }
+  }
 </script>
 
 <svelte:head>
@@ -68,6 +79,8 @@ import Stars from "$lib/components/Stars.svelte";
 
   .welcome-title-inner {
     text-align: center;
+    margin-left: 1em;
+    margin-right: 1em;
   }
 
   .welcome-title-inner > h1 {
@@ -93,6 +106,10 @@ import Stars from "$lib/components/Stars.svelte";
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
+  }
+
+  .tinytext {
+    font-size: 0.5em;
   }
 
   .section {
@@ -142,20 +159,23 @@ import Stars from "$lib/components/Stars.svelte";
     </div>
     <div class="welcome-title">
       <div class="welcome-title-inner">
-      <h1 class="rainbow-box">Dom's Website</h1>
-      <p>This is my place where I occasionally post my recent projects (big and small) as well as other things that I find interesting...</p>
+      <!-- <h1 class="rainbow-box">Good {getTimeofDay()}.</h1> -->
+      <h1 class="rainbow-box">Hi.</h1>
+      <p>I'm Dom and this is my space <span class="tinytext">(no pun intended)</span> where I occasionally post my recent projects (big and small) as well as other things that I find interesting...</p>
+      <p>I've recently graduated from university with a degree in computer science and I am now looking for a job web development or machine learning (although I can do other stuff too!).</p>
+      <p>I spend most of my my free time programming, playing video games, and learning more about the world.</p>
       </div>
     </div>
     <div class="welcome-navbar">
       <Navbar transparent></Navbar>
     </div>
   </div>
-  <div class="header" id="about">
+  <!-- <div class="header" id="about">
     <h2>About Me</h2>
   </div>
   <div class="section">
     <p>My name is Dom and I have recently graduated from university with a degree in Computer Science!</p>
-  </div>
+  </div> -->
 
   <div class="header" id="projects">
     <h2>Projects</h2>
