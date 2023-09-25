@@ -2,7 +2,6 @@
 	import { FlagGame, FlagMenu } from "$lib";
 	import ResultsTable from "$lib/components/flaggame/ResultsTable.svelte";
 	import type { FlagResult, Difficulty } from "$lib/components/flaggame/flaggame";
-	import Game from "$lib/components/squarestack/Game.svelte";
 
   enum Mode {
     MENU,
@@ -38,8 +37,12 @@
   }
 </style>
 
+<svelte:head>
+  <title>Guess the Flag</title>
+</svelte:head>
+
 <div class="game-page">
-  <h2>Dom's Flag Guessing Game (Second Edition)</h2>
+  <h2>Guess the Flag (Second Edition)</h2>
   {#if mode === Mode.MENU}
     <FlagMenu begin={startGame}/>
   {:else if mode === Mode.GAME}

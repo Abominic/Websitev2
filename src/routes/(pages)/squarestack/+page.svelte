@@ -16,4 +16,5 @@
 <svelte:head>
   <!-- prevent this page from ever appearing in search -->
   <meta name="robots" content="noindex" />
+  <title>SquareStack</title>
 </svelte:head>

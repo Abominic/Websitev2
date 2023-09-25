@@ -39,6 +39,7 @@
 
   .navbar.transparent {
     background-color: transparent !important;
+    color: white;
     /* border-bottom: 1px solid white; */
   }
 </style>

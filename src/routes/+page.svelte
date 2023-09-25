@@ -108,8 +108,9 @@
     background-clip: text;
   }
 
-  .tinytext {
-    font-size: 0.8em;
+  .redtext {
+    color: red;
+    font-weight: bold;
   }
 
   .section {
@@ -129,6 +130,7 @@
     margin:1em;
     border-radius: 5px;
     box-sizing: border-box;
+    color: white;
   }
 
   .projlink {
@@ -159,11 +161,11 @@
     </div>
     <div class="welcome-title">
       <div class="welcome-title-inner">
-      <!-- <h1 class="rainbow-box">Good {getTimeofDay()}.</h1> -->
-      <h1 class="rainbow-box">Hi.</h1>
-      <p>I'm Dom and this is my space <span class="tinytext">(no pun intended)</span> where I occasionally post my recent projects (big and small) as well as other things that I find interesting...</p>
-      <p>I've recently graduated from university with a degree in computer science and I am now looking for a job web development or machine learning (although I can do other stuff too!).</p>
-      <p>I spend most of my my free time programming, playing video games, and learning more about the world.</p>
+        <!-- <h1 class="rainbow-box">Good {getTimeofDay()}.</h1> -->
+        <h1 class="rainbow-box">Dominic Munn</h1>
+        <p>This is my space (no pun intended) where I occasionally post my recent projects (big and small) as well as other things that I find interesting...</p>
+        <p>I've recently graduated from university with a degree in computer science and I am now looking for a job web development or machine learning (although I can do other stuff too!).</p>
+        <p>I spend most of my my free time programming, playing video games, and learning more about the world.</p>
       </div>
     </div>
     <div class="welcome-navbar">
@@ -183,7 +185,7 @@
   <div class="section project-list">
     <div class="project" id="squarestack">
       <h3>Stack the Squares</h3>
-      <p>A clone of a <span class="italic">certain</span> game (re)written using Svelte. NOTE: Keyboard required. Maybe I'll figure out how I should do touch controls one day. </p>
+      <p>A clone of a <span class="italic">certain</span> game (re)written using Svelte.  Maybe I'll figure out how I should do touch controls one day. <span class="redtext">(KEYBOARD REQUIRED)</span></p>
       <br>
       <a href={SQUARESTACK_LINK} class="projlink">Game</a>
       <a href="https://github.com/Abominic/Websitev2" class="projlink">GitHub</a>
