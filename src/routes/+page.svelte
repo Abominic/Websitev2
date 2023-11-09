@@ -4,7 +4,7 @@
 
   const SQUARESTACK_LINK = "/squarestack";
   const FLAGGAME_LINK = "/flaggame";
-  const DOMCRAFT_LINK = "https://github.com/Abominic/Domcraft";
+  const DOMCRAFT_LINK = "https://github.com/Dominically/Domcraft";
 
   function getTimeofDay() {
     let d = new Date();
@@ -20,7 +20,6 @@
 
 <svelte:head>
   <meta name="description" content="Dom's personal website."/>
-  <meta name="keywords" content="Abominic">
   <meta name="author" content="Dominic Munn">
   <title>Dom's Website</title>
 </svelte:head>
@@ -185,21 +184,21 @@
   <div class="section project-list">
     <div class="project" id="squarestack">
       <h3>Stack the Squares</h3>
-      <p>A clone of a <span class="italic">certain</span> game (re)written using Svelte.  Maybe I'll figure out how I should do touch controls one day. <span class="redtext">(KEYBOARD REQUIRED)</span></p>
+      <p>A clone of a <span class="italic">certain</span> game (re)written using Svelte. Touch controls for this game are coming soon. <span class="redtext">(KEYBOARD RECOMMENDED)</span></p>
       <br>
       <a href={SQUARESTACK_LINK} class="projlink">Game</a>
-      <a href="https://github.com/Abominic/Websitev2" class="projlink">GitHub</a>
+      <a href="https://github.com/Dominically/Websitev2" class="projlink">GitHub</a>
     </div>
     <div class="project" id="flaggame">
       <h3>Flag Game</h3>
       <p>A simple flag-guessing game, written for the purpose of learning more about web development.</p>
       <br>
       <a href={FLAGGAME_LINK} class="projlink">Game</a>
-      <a href="https://github.com/Abominic/Websitev2" class="projlink">GitHub</a>
+      <a href="https://github.com/Dominically/Websitev2" class="projlink">GitHub</a>
     </div>
     <div class="project" id="domcraft">
       <h3>Domcraft</h3>
-      <p>Proceduraly-generated (with multithreading) voxel engine (Minecraft-like) written in Rust. It will melt your laptop.</p>
+      <p>My proceduraly-generated (with multithreading) voxel engine (Minecraft-like) written in Rust. So far, this is my favourite project!</p>
       <br>
       <a href={DOMCRAFT_LINK} class="projlink">GitHub</a>
       <!-- svelte-ignore a11y-img-redundant-alt -->
